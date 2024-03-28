@@ -6,10 +6,13 @@ from datetime import datetime
 # Global constant for CFT calculation
 CFT_CONSTANT = 144
 
+# GitHub links
+github_repo = "https://github.com/imMilanpatel/Timber-CFT-Calculator/tree/main"
+
 class TimberCalculatorApp:
     def __init__(self, master):
         self.master = master
-        master.title("Timber Wood Calculator")
+        master.title("Timber CFT Calculator")
 
         # Variables for input fields
         self.size_var = tk.StringVar()
@@ -190,7 +193,24 @@ class TimberCalculatorApp:
             self.master.destroy()
 
     def show_about_info(self):
-        messagebox.showinfo("About", "Timber Wood Calculator\nVersion 1.0\n\nDeveloper: [Developer Name]\nGitHub: [GitHub Link]")
+        about_dialog = tk.Toplevel(self.master)
+        about_dialog.title("About")
+        about_dialog.geometry("300x150")
+        about_dialog.resizable(False, False)
+
+        about_text = "Timber CFT Calculator\nVersion 1.0\n\nDeveloper: Milan Patel\nEmail: milanpatel3116@gmail.com"
+        about_label = tk.Label(about_dialog, text=about_text)
+        about_label.pack(pady=5)
+
+        github_link_text = "Project Repo Link, Click here!"
+        github_label = tk.Label(about_dialog, text=github_link_text, fg="blue", cursor="hand2")
+        github_label.pack(pady=5)
+
+        def open_github(event):
+            import webbrowser
+            webbrowser.open_new("[Your GitHub Link]")
+
+        github_label.bind("<Button-1>", open_github)
 
     def show_app_usage(self):
         messagebox.showinfo("App Usage", "1. Enter the size of timber wood in the format '4x3'.\n"
