@@ -135,8 +135,9 @@ class TimberCalculatorApp:
     def export_to_excel(self):
         try:
             customer_name = self.customer_name_var.get()
+            current_date = datetime.now().strftime('%d_%B_%Y')
             size = self.size_var.get()
-            filename = f"{customer_name}_{size}.xlsx"
+            filename = f"{customer_name}_{size}_{current_date}.xlsx"
 
             wb = Workbook()
             ws = wb.active
