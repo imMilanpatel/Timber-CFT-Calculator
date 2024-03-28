@@ -75,12 +75,12 @@ class TimberCalculatorApp:
         # Total Pieces Label
         tk.Label(master, text="Total Pieces:").grid(row=7, column=0, sticky="w")
         self.total_pieces_label = tk.Label(master, textvariable=self.total_pieces_var)
-        self.total_pieces_label.grid(row=7, column=1, sticky="w")
+        self.total_pieces_label.grid(row=8, column=0, sticky="sw")
 
         # Total CFT Label
         tk.Label(master, text="Total CFT:").grid(row=7, column=2, sticky="w")
         self.total_cft_label = tk.Label(master, textvariable=self.total_cft_var)
-        self.total_cft_label.grid(row=7, column=3, sticky="w")
+        self.total_cft_label.grid(row=8, column=2, sticky="sw")
 
     def generate_table(self):
         try:
