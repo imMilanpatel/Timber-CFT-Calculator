@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import messagebox
-import pandas as pd
 from openpyxl import Workbook
 from datetime import datetime
 
@@ -135,11 +134,14 @@ class TimberCalculatorApp:
 
     def export_to_excel(self):
         try:
-            filename = f"timber_calculator_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.xlsx"
+            customer_name = self.customer_name_var.get()
+            size = self.size_var.get()
+            filename = f"{customer_name}_{size}.xlsx"
+
             wb = Workbook()
             ws = wb.active
             ws.title = "Timber Calculator Data"
-            
+
             # Write customer details
             ws["A1"] = "Customer Name:"
             ws["B1"] = self.customer_name_var.get()
@@ -147,37 +149,37 @@ class TimberCalculatorApp:
             ws["B2"] = self.customer_address_var.get()
             ws["A3"] = "Customer Phone:"
             ws["B3"] = self.customer_phone_var.get()
-            
+
             # Write size info
             ws["A5"] = "Size:"
             ws["B5"] = self.size_var.get()
-            
+
             # Write table headers
             headers = ["WIDTH", "THICK", "LENGTH", "PIECES", "CFT"]
             for col, header in enumerate(headers):
-                ws.cell(row=7, column=col+1, value=header)
-            
+                ws.cell(row=7, column=col + 1, value=header)
+
             # Write table data
             for row in range(1, self.table_rows_var.get() + 1):
                 for col in range(1, 6):
                     if col <= 2:  # Width and Thick columns
-                        ws.cell(row=row+7, column=col, value=int(self.table_frame.grid_slaves(row=row, column=col-1)[0].cget('text')))
+                        ws.cell(row=row + 7, column=col, value=int(self.table_frame.grid_slaves(row=row, column=col - 1)[0].cget('text')))
                     elif col == 5:  # CFT column
-                        cft_text = self.table_frame.grid_slaves(row=row, column=col-2)[0].cget('text')
-                        ws.cell(row=row+7, column=col, value=float(cft_text) if cft_text else None)
+                        cft_text = self.table_frame.grid_slaves(row=row, column=col - 1)[0].cget('text')
+                        ws.cell(row=row + 7, column=col, value=float(cft_text) if cft_text else None)
                     else:  # Length and Pieces columns
-                        value = self.table_frame.grid_slaves(row=row, column=col-1)[0].get()
-                        ws.cell(row=row+7, column=col, value=float(value) if value else None)
-            
+                        value = self.table_frame.grid_slaves(row=row, column=col - 1)[0].get()
+                        ws.cell(row=row + 7, column=col, value=float(value) if value else None)
+
             # Write total pieces and total CFT
-            ws["A{}".format(8+self.table_rows_var.get()+2)] = "Total Pieces:"
-            ws["B{}".format(8+self.table_rows_var.get()+2)] = self.total_pieces_var.get()
-            ws["A{}".format(8+self.table_rows_var.get()+3)] = "Total CFT:"
-            ws["B{}".format(8+self.table_rows_var.get()+3)] = self.total_cft_var.get()
-            
+            ws["A{}".format(8 + self.table_rows_var.get() + 2)] = "Total Pieces:"
+            ws["B{}".format(8 + self.table_rows_var.get() + 2)] = self.total_pieces_var.get()
+            ws["A{}".format(8 + self.table_rows_var.get() + 3)] = "Total CFT:"
+            ws["B{}".format(8 + self.table_rows_var.get() + 3)] = self.total_cft_var.get()
+
             # Save workbook
             wb.save(filename)
-            
+
             messagebox.showinfo("Export Successful", f"Data exported to {filename}")
         except Exception as e:
             messagebox.showerror("Export Error", f"An error occurred: {e}")
