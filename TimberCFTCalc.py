@@ -19,6 +19,10 @@ class TimberCalculatorApp:
         self.customer_phone_var = tk.StringVar()
         self.table_rows_var = tk.IntVar(value=10)
 
+        # Variables for totals
+        self.total_pieces_var = tk.IntVar(value=0)
+        self.total_cft_var = tk.DoubleVar(value=0.0)
+
         # Create menu bar
         menubar = tk.Menu(master)
         file_menu = tk.Menu(menubar, tearoff=0)
@@ -66,6 +70,16 @@ class TimberCalculatorApp:
         self.calculate_cft_btn = tk.Button(master, text="Calculate CFT", command=self.calculate_cft, state=tk.DISABLED)
         self.calculate_cft_btn.grid(row=6, column=0, columnspan=3, pady=10)
 
+        # Total Pieces Label
+        tk.Label(master, text="Total Pieces:").grid(row=7, column=0, sticky="w")
+        self.total_pieces_label = tk.Label(master, textvariable=self.total_pieces_var)
+        self.total_pieces_label.grid(row=7, column=1, sticky="w")
+
+        # Total CFT Label
+        tk.Label(master, text="Total CFT:").grid(row=7, column=2, sticky="w")
+        self.total_cft_label = tk.Label(master, textvariable=self.total_cft_var)
+        self.total_cft_label.grid(row=7, column=3, sticky="w")
+
     def generate_table(self):
         try:
             # Parse size input
@@ -103,6 +117,7 @@ class TimberCalculatorApp:
     def calculate_cft(self):
         try:
             total_cft = 0
+            total_pieces = 0
             for row in range(1, self.table_rows_var.get() + 1):
                 length = float(self.table_frame.grid_slaves(row=row, column=2)[0].get())
                 pieces = float(self.table_frame.grid_slaves(row=row, column=3)[0].get())
@@ -110,7 +125,10 @@ class TimberCalculatorApp:
                        int(self.table_frame.grid_slaves(row=row, column=1)[0].cget('text')) *
                        length * pieces) / CFT_CONSTANT
                 total_cft += cft
+                total_pieces += pieces
                 tk.Label(self.table_frame, text=f"{cft:.2f}").grid(row=row, column=4)
+            self.total_cft_var.set(f"{total_cft:.2f}")
+            self.total_pieces_var.set(total_pieces)
             messagebox.showinfo("Calculation Complete", f"Total CFT: {total_cft:.2f}")
         except ValueError:
             messagebox.showerror("Error", "Invalid input. Please enter valid numbers.")
