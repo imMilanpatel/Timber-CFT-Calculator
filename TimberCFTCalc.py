@@ -223,6 +223,7 @@ class TimberCalculatorApp:
 
 def main():
     root = tk.Tk()
+    root.resizable(False,False)
     app = TimberCalculatorApp(root)
     root.mainloop()
 
