@@ -101,17 +101,16 @@ class TimberCalculatorApp:
             messagebox.showerror("Error", "Invalid size input. Please enter in the format '4x3'.")
 
     def calculate_cft(self):
-        total_cft = 0
         try:
-            for row in self.table_frame.winfo_children():
-                if isinstance(row, tk.Frame):
-                    length = int(row.grid_slaves(row=0, column=2)[0].get())
-                    pieces = int(row.grid_slaves(row=0, column=3)[0].get())
-                    cft = (int(row.grid_slaves(row=0, column=0)[0].cget('text')) *
-                           int(row.grid_slaves(row=0, column=1)[0].cget('text')) *
-                           length * pieces) / CFT_CONSTANT
-                    total_cft += cft
-                    tk.Label(row, text=f"{cft:.2f}").grid(row=0, column=4)
+            total_cft = 0
+            for row in range(1, self.table_rows_var.get() + 1):
+                length = float(self.table_frame.grid_slaves(row=row, column=2)[0].get())
+                pieces = float(self.table_frame.grid_slaves(row=row, column=3)[0].get())
+                cft = (int(self.table_frame.grid_slaves(row=row, column=0)[0].cget('text')) *
+                       int(self.table_frame.grid_slaves(row=row, column=1)[0].cget('text')) *
+                       length * pieces) / CFT_CONSTANT
+                total_cft += cft
+                tk.Label(self.table_frame, text=f"{cft:.2f}").grid(row=row, column=4)
             messagebox.showinfo("Calculation Complete", f"Total CFT: {total_cft:.2f}")
         except ValueError:
             messagebox.showerror("Error", "Invalid input. Please enter valid numbers.")
