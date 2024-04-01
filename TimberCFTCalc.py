@@ -9,6 +9,9 @@ CFT_CONSTANT = 144
 # GitHub links
 github_repo = "https://github.com/imMilanpatel/Timber-CFT-Calculator/tree/main"
 
+# Constants
+Developer = "Milan Patel"
+
 class TimberCalculatorApp:
     def __init__(self, master):
         self.master = master
@@ -198,7 +201,7 @@ class TimberCalculatorApp:
         about_dialog.geometry("300x150")
         about_dialog.resizable(False, False)
 
-        about_text = "Timber CFT Calculator\nVersion 1.0\n\nDeveloper: Milan Patel\nEmail: milanpatel3116@gmail.com"
+        about_text = f"Timber CFT Calculator\nVersion 1.0\n\nDeveloper: {Developer}\nEmail: milanpatel3116@gmail.com"
         about_label = tk.Label(about_dialog, text=about_text)
         about_label.pack(pady=5)
 
