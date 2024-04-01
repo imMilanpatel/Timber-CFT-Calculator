@@ -45,7 +45,7 @@ class TimberCalculatorApp:
 
         # Create input fields
         tk.Label(master, text="Size (e.g. 4x3):").grid(row=0, column=0, sticky="w")
-        self.size_entry = tk.Entry(master, textvariable=self.size_var, width=10)
+        self.size_entry = tk.Entry(master, textvariable=self.size_var, width=30)
         self.size_entry.grid(row=0, column=1, sticky="w")
 
         tk.Label(master, text="Customer Name:").grid(row=1, column=0, sticky="w")
@@ -53,28 +53,28 @@ class TimberCalculatorApp:
         self.customer_name_entry.grid(row=1, column=1, columnspan=2, sticky="w")
 
         tk.Label(master, text="Customer Address:").grid(row=2, column=0, sticky="w")
-        self.customer_address_entry = tk.Entry(master, textvariable=self.customer_address_var, width=50)
+        self.customer_address_entry = tk.Entry(master, textvariable=self.customer_address_var, width=30)
         self.customer_address_entry.grid(row=2, column=1, columnspan=2, sticky="w")
 
         tk.Label(master, text="Customer Phone:").grid(row=3, column=0, sticky="w")
-        self.customer_phone_entry = tk.Entry(master, textvariable=self.customer_phone_var, width=15)
+        self.customer_phone_entry = tk.Entry(master, textvariable=self.customer_phone_var, width=30)
         self.customer_phone_entry.grid(row=3, column=1, sticky="w")
 
         tk.Label(master, text="Table Rows:").grid(row=4, column=0, sticky="w")
-        self.table_rows_spinbox = tk.Spinbox(master, from_=1, to=100, textvariable=self.table_rows_var, width=5)
+        self.table_rows_spinbox = tk.Spinbox(master, from_=1, to=100, textvariable=self.table_rows_var, width=28)
         self.table_rows_spinbox.grid(row=4, column=1, sticky="w")
 
         # Generate Table Button
-        self.generate_table_btn = tk.Button(master, text="Generate Table", command=self.generate_table)
-        self.generate_table_btn.grid(row=4, column=2, sticky="w")
+        self.generate_table_btn = tk.Button(master, text="Generate Table", command=self.generate_table, width=25)
+        self.generate_table_btn.grid(row=5, column=1, sticky="w")
 
         # Table Frame
         self.table_frame = tk.Frame(master)
         self.table_frame.grid(row=5, column=0, columnspan=3)
 
         # Calculate CFT Button
-        self.calculate_cft_btn = tk.Button(master, text="Calculate CFT", command=self.calculate_cft, state=tk.DISABLED)
-        self.calculate_cft_btn.grid(row=6, column=0, columnspan=3, pady=10)
+        self.calculate_cft_btn = tk.Button(master, width=25, text="Calculate CFT", command=self.calculate_cft, state=tk.DISABLED)
+        self.calculate_cft_btn.grid(row=6, column=1, pady=10)
 
         # Total Pieces Label
         tk.Label(master, text="Total Pieces:").grid(row=7, column=0, sticky="w")
@@ -82,9 +82,9 @@ class TimberCalculatorApp:
         self.total_pieces_label.grid(row=8, column=0, sticky="sw")
 
         # Total CFT Label
-        tk.Label(master, text="Total CFT:").grid(row=7, column=2, sticky="w")
+        tk.Label(master, text="Total CFT:").grid(row=9, column=0, sticky="w")
         self.total_cft_label = tk.Label(master, textvariable=self.total_cft_var)
-        self.total_cft_label.grid(row=8, column=2, sticky="sw")
+        self.total_cft_label.grid(row=10, column=0, sticky="sw")
 
     def generate_table(self):
         try:
