@@ -11,6 +11,7 @@ github_repo = "https://github.com/imMilanpatel/Timber-CFT-Calculator/tree/main"
 
 # Constants
 Developer = "Milan Patel"
+Dev_Email = "milanpatel3116@gmail.com"
 
 class TimberCalculatorApp:
     def __init__(self, master):
@@ -201,7 +202,7 @@ class TimberCalculatorApp:
         about_dialog.geometry("300x150")
         about_dialog.resizable(False, False)
 
-        about_text = f"Timber CFT Calculator\nVersion 1.0\n\nDeveloper: {Developer}\nEmail: milanpatel3116@gmail.com"
+        about_text = f"Timber CFT Calculator\nVersion 1.0\n\nDeveloper: {Developer}\nEmail: {Dev_Email}"
         about_label = tk.Label(about_dialog, text=about_text)
         about_label.pack(pady=5)
 
